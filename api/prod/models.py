@@ -31,26 +31,32 @@ class TaskItem(models.Model):
 
 
 class CollaboratorPendingRequest(models.Model):
-    user_sender = models.ForeignKey(Account, on_delete=models.CASCADE)
-    user_recipient = models.ForeignKey(Account, on_delete=models.CASCADE)
+    request_id = models.AutoField("request_id", primary_key=True)
+    user_sender = models.ForeignKey(Account, related_name="user_sender", on_delete=models.CASCADE)
+    user_recipient = models.ForeignKey(Account, related_name="user_recipient", on_delete=models.CASCADE)
     datetime_sent = models.DateTimeField("datetime_sent", default=None)
 
 
 class Collaborator(models.Model):
-    user_master = models.ForeignKey(Account, on_delete=models.CASCADE)
-    user_peer = models.ForeignKey(Account, on_delete=models.CASCADE)
+    collab_id = models.AutoField("collab_id", primary_key=True)
+    user_master = models.ForeignKey(Account, related_name="user_master", on_delete=models.CASCADE)
+    user_peer = models.ForeignKey(Account, related_name="user_peer", on_delete=models.CASCADE)
 
 
 class Blocked(models.Model):
-    user_blocker = models.ForeignKey(Account, on_delete=models.CASCADE)
-    user_blockee = models.ForeignKey(Account, on_delete=models.CASCADE)
+    block_id = models.AutoField("block_id", primary_key=True)
+    user_blocker = models.ForeignKey(Account, related_name="user_blocker", on_delete=models.CASCADE)
+    user_blockee = models.ForeignKey(Account, related_name="user_blockee", on_delete=models.CASCADE)
 
 
 class ListSharedWith(models.Model):
+    share_id = models.AutoField("share_id", primary_key=True)
     task_list = models.ForeignKey(TaskList, on_delete=models.CASCADE)
+    user_shared_with = models.ForeignKey(Account, on_delete=models.CASCADE)
     
     
 class TaskReminder(models.Model):
+    reminder_id = models.AutoField("reminder_id", primary_key=True)
     task_item = models.ForeignKey(TaskItem, on_delete=models.CASCADE)
     reminder_type = models.CharField("reminder_type", max_length=30)
     reminder_datetime = models.DateTimeField("reminder_datetime", default=None)
