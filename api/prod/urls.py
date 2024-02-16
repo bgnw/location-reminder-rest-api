@@ -4,8 +4,8 @@ from .views import AccountCreate, AccountList, AccountDetail, AccountUpdate, Acc
 urlpatterns = [
     path('create/', AccountCreate.as_view(), name='create-account'),
     path('', AccountList.as_view()),
-    path('<int:pk>', AccountDetail.as_view(), name='retrieve-account'),
-    path('update/<int:pk>', AccountUpdate.as_view(), name='update-account'),
-    path('delete/<int:pk>', AccountDelete.as_view(), name='delete-account')
+    path('<str:pk>', AccountDetail.as_view(), name='retrieve-account'),
+    path('update/<str:pk>', AccountUpdate.as_view(), name='update-account'),
+    path('delete/<str:pk>', AccountDelete.as_view(), name='delete-account')
 ]
 
