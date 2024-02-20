@@ -11,7 +11,7 @@ class AccountSerializer(serializers.ModelSerializer):
 class TaskListSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = TaskList
-		fields = ['list_id','title','icon_name','owner','sort_by','visibility',]
+		fields = ['list_id','title','icon_name','created_at','owner','sort_by','visibility']
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
