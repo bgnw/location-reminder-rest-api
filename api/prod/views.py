@@ -64,7 +64,7 @@ class TaskItemList(generics.ListAPIView):
 
 
 class TaskItemSearchListID(generics.ListAPIView):
-    queryset = TaskItem.objects.filter(list_id=3)  # Assuming 'list' is a foreign key field
+    queryset = TaskItem.objects.filter(list=3)  # Assuming 'list' is a foreign key field
     serializer_class = TaskItemSerializer
     # # search_fields = ['list'],
     # filter_backends = (filters.SearchFilter,)
