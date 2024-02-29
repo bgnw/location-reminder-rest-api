@@ -4,7 +4,7 @@ from .views import TaskListCreate, TaskListList, TaskListDetail, TaskListUpdate,
 urlpatterns = [
     path('create/', TaskListCreate.as_view(), name='create-taskl'),
     path('get', TaskListList.as_view()),
-    path('<str:pk>', TaskListDetail.as_view(), name='retrieve-taskl'),
+    path('<int:pk>', TaskListDetail.as_view(), name='retrieve-taskl'),
     path('update/<str:pk>', TaskListUpdate.as_view(), name='update-taskl'),
     path('delete/<str:pk>', TaskListDelete.as_view(), name='delete-taskl'),
 ]
