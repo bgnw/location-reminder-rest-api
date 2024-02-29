@@ -17,4 +17,4 @@ class TaskListSerializer(serializers.ModelSerializer):
 class TaskItemSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = TaskItem
-		fields = ['item_id','body_text','remind_method','attachment_img_path','snooze_until','completed','due_at','is_sub_task','parent_task']
+		fields = ['item_id', 'list_id', 'body_text','remind_method','attachment_img_path','snooze_until','completed','due_at','is_sub_task','parent_task']
