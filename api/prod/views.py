@@ -69,8 +69,8 @@ class TaskItemSearchListID(generics.ListAPIView):
     filterset_fields = ['list']
     # queryset = TaskItem.objects.all()
     def get_queryset(self):
-        list = self.request.query_params.getlist('list[]', [])
-        return TaskItem.objects.filter(list__in=list)
+        list = self.request.query_params.getlist('list', None)
+        return TaskItem.objects.filter(list=list)
     serializer_class = TaskItemSerializer
 
 class TaskItemDetail(generics.RetrieveAPIView):
