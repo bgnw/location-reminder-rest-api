@@ -24,7 +24,7 @@ class TaskItem(models.Model):
     body_text = models.CharField("body_text", max_length=1500, default=None)
     remind_method = models.CharField("remind_method", max_length=30, blank=True)
     attachment_img_path = models.CharField("attachment_img_path", max_length=1024, default=None, blank=True)
-    snooze_until = models.DateTimeField("snooze_until", default=None, blank=True, required=False, allow_null=True)
+    snooze_until = models.DateTimeField("snooze_until", default=None, blank=True)
     completed = models.BooleanField("completed", default=False)
     due_at = models.DateTimeField("due_at", blank=True)
     is_sub_task = models.BooleanField("is_sub_task", default=False)
