@@ -39,17 +39,17 @@ class TaskListList(generics.ListAPIView):
 
 class TaskListDetail(generics.RetrieveAPIView):
     queryset = TaskList.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = TaskListSerializer
 
 
 class TaskListUpdate(generics.RetrieveUpdateAPIView):
     queryset = TaskList.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = TaskListSerializer
 
 
 class TaskListDelete(generics.RetrieveDestroyAPIView):
     queryset = TaskList.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = TaskListSerializer
 
 
 class TaskItemCreate(generics.CreateAPIView):
@@ -64,14 +64,14 @@ class TaskItemList(generics.ListAPIView):
 
 class TaskItemDetail(generics.RetrieveAPIView):
     queryset = TaskItem.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = TaskItemSerializer
 
 
 class TaskItemUpdate(generics.RetrieveUpdateAPIView):
     queryset = TaskItem.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = TaskItemSerializer
 
 
 class TaskItemDelete(generics.RetrieveDestroyAPIView):
     queryset = TaskItem.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = TaskItemSerializer
