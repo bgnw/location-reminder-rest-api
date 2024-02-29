@@ -22,13 +22,13 @@ class TaskList(models.Model):
 class TaskItem(models.Model):
     item_id = models.AutoField("item_id", primary_key=True)
     body_text = models.CharField("body_text", max_length=1500, default=None)
-    remind_method = models.CharField("remind_method", max_length=30, null=True)
-    attachment_img_path = models.CharField("attachment_img_path", max_length=1024, default=None, null=True)
-    snooze_until = models.DateTimeField("snooze_until", default=None, null=True)
+    remind_method = models.CharField("remind_method", max_length=30, blank=True)
+    attachment_img_path = models.CharField("attachment_img_path", max_length=1024, default=None, blank=True)
+    snooze_until = models.DateTimeField("snooze_until", default=None, blank=True)
     completed = models.BooleanField("completed", default=False)
-    due_at = models.DateTimeField("due_at", null=True)
+    due_at = models.DateTimeField("due_at", blank=True)
     is_sub_task = models.BooleanField("is_sub_task", default=False)
-    parent_task = models.ForeignKey("self", on_delete=models.CASCADE, default=None, null=True)  # FK of another TaskItem
+    parent_task = models.ForeignKey("self", on_delete=models.CASCADE, default=None, blank=True)  # FK of another TaskItem
 
 
 class CollaboratorPendingRequest(models.Model):
