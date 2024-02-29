@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Account, TaskList, TaskItem
 from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer
 from rest_framework import generics
+from rest_framework import filters
 
 class AccountCreate(generics.CreateAPIView):
     queryset = Account.objects.all()
@@ -61,6 +62,12 @@ class TaskItemList(generics.ListAPIView):
     queryset = TaskItem.objects.all()
     serializer_class = TaskItemSerializer
 
+
+class TaskItemSearchListID(generics.ListAPIView):
+    search_fields = ['list'],
+    filter_backends = (filters.SearchFilter,)
+    queryset = TaskItem.objects.all()
+    serializer_class = TaskItemSerializer
 
 class TaskItemDetail(generics.RetrieveAPIView):
     queryset = TaskItem.objects.all()
