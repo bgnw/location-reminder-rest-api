@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from rest_framework.response import Response
+
 from .models import Account, TaskList, TaskItem
 from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer
 from rest_framework import generics
@@ -13,10 +15,20 @@ class AccountList(generics.ListAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
+class AccountCheck(generics.ListAPIView):
+    serializer_class = TaskItemSerializer
+
+    def list(self, request, *args, **kwargs):
+        specified_user = self.kwargs.get('username')
+        specified_pass = self.kwargs.get('password')
+        queryset = TaskItem.objects.filter(username=specified_user, password=specified_pass)
+        has_matching_records = queryset.exists()
+        return Response({"has_matching_records": has_matching_records})
 
 class AccountDetail(generics.RetrieveAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+
 
 class AccountUpdate(generics.RetrieveUpdateAPIView):
     queryset = Account.objects.all()
