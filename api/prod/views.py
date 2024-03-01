@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 
-from .models import Account, TaskList, TaskItem
-from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer
+from .models import Account, TaskList, TaskItem, ItemOpportunity
+from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer, ItemOpportunitySerializer
 from rest_framework import generics
 from rest_framework import filters
 
@@ -110,3 +110,11 @@ class TaskItemUpdate(generics.RetrieveUpdateAPIView):
 class TaskItemDelete(generics.RetrieveDestroyAPIView):
     queryset = TaskItem.objects.all()
     serializer_class = TaskItemSerializer
+
+
+class ItemOpportunityLookup(generics.ListAPIView):
+    def get_queryset(self):
+        specified_item = self.kwargs.get('item_id')
+        return ItemOpportunity.objects.filter(list=specified_item)
+
+    serializer_class = ItemOpportunitySerializer

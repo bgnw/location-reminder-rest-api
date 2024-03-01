@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import TaskItemCreate, TaskItemList, TaskItemDetail, TaskItemUpdate, TaskItemDelete, TaskItemSearchListID, TaskItemSearchOwner
+from .views import TaskItemCreate, TaskItemList, TaskItemDetail, TaskItemUpdate, TaskItemDelete, TaskItemSearchListID, TaskItemSearchOwner, ItemOpportunityLookup
 
 urlpatterns = [
     path('create/', TaskItemCreate.as_view(), name='create-taski'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>', TaskItemDetail.as_view(), name='retrieve-taski'),
     path('update/<int:pk>', TaskItemUpdate.as_view(), name='update-taski'),
     path('delete/<int:pk>', TaskItemDelete.as_view(), name='delete-taski'),
+    path('opps/<int:item_id>', ItemOpportunityLookup.as_view(), name='iopp-lookup'),
 ]

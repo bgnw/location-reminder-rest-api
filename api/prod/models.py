@@ -23,14 +23,25 @@ class TaskItem(models.Model):
     item_id = models.AutoField("item_id", primary_key=True)
     list = models.ForeignKey(TaskList, on_delete=models.CASCADE)
     owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+    title = models.CharField("title", max_length=100)
     body_text = models.CharField("body_text", max_length=1500)
     remind_method = models.CharField("remind_method", max_length=30, null=True, blank=True)
     attachment_img_path = models.CharField("attachment_img_path", max_length=1024, null=True, blank=True)
-    snooze_until = models.DateTimeField("snooze_until", null=True, blank=True)
-    completed = models.BooleanField("completed", default=False)
-    due_at = models.DateTimeField("due_at", null=True, blank=True)
     is_sub_task = models.BooleanField("is_sub_task", null=True, blank=True)
     parent_task = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)  # FK of another TaskItem
+    completed = models.BooleanField("completed", default=False)
+    snooze_until = models.DateTimeField("snooze_until", null=True, blank=True)
+    due_at = models.DateTimeField("due_at", null=True, blank=True)
+
+class ItemOpportunity(models.Model):
+    opp_id = models.AutoField("opp_id", primary_key=True)
+    item = models.ForeignKey(TaskItem, on_delete=models.CASCADE)
+    suppressed = models.BooleanField("suppressed", default=False)
+    place_name = models.CharField("place_name", max_length=200)
+    category = models.CharField("category", max_length=200)
+    lati = models.DecimalField("lati", max_digits=9, decimal_places=6)
+    longi = models.DecimalField("longi", max_digits=9, decimal_places=6)
+    alti = models.DecimalField("alti", max_digits=8, decimal_places=2)
 
 
 class CollaboratorPendingRequest(models.Model):
