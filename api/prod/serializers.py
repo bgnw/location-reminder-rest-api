@@ -15,6 +15,7 @@ class TaskListSerializer(serializers.ModelSerializer):
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
+    list = TaskListSerializer
     class Meta:
         model = TaskItem
         fields = ['item_id', 'list', 'owner', 'body_text', 'remind_method', 'attachment_img_path', 'snooze_until',
@@ -28,9 +29,10 @@ class TaskItemSerializer(serializers.ModelSerializer):
 #                   'due_at']
 
 
-class ItemOpportunitySerializer(serializers.Serializer):
-    level = TaskItemSerializer(read_only=True)
-
+class ItemOpportunitySerializer(serializers.ModelSerializer):
+    item = TaskItemSerializer()
     class Meta:
         model = ItemOpportunity
-        fields = ['opp_id', 'item', 'suppressed', 'place_name', 'category', 'lati', 'longi', 'alti']
+        fields = '__all__'
+
+

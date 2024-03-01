@@ -112,14 +112,18 @@ class TaskItemDelete(generics.RetrieveDestroyAPIView):
     serializer_class = TaskItemSerializer
 
 
+class ItemOpportunityList(generics.ListAPIView):
+    queryset = ItemOpportunity.objects.all()
+    serializer_class = ItemOpportunitySerializer
+
 class ItemOpportunityLookup(generics.ListAPIView):
+    serializer_class = ItemOpportunitySerializer
     def get_queryset(self):
         specified_item = self.kwargs.get('item_id')
         return ItemOpportunity.objects.filter(item=specified_item)
 
-    serializer_class = ItemOpportunitySerializer
-
 
 class ItemOpportunityCreate(generics.CreateAPIView):
-    queryset = TaskItem.objects.all()
+    queryset = ItemOpportunity.objects.all()
     serializer_class = ItemOpportunitySerializer
+
