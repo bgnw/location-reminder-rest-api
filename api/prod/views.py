@@ -21,7 +21,7 @@ class AccountCheck(generics.ListAPIView):
     def list(self, request, *args, **kwargs):
         specified_user = self.kwargs.get('username')
         specified_pass = self.kwargs.get('password')
-        queryset = TaskItem.objects.filter(username=specified_user, password=specified_pass)
+        queryset = Account.objects.filter(username=specified_user, password=specified_pass)
         authentication_success = queryset.exists()
         return Response({"authentication_success": authentication_success})
 
