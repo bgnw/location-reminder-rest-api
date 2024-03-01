@@ -10,4 +10,5 @@ urlpatterns = [
     path('update/<int:pk>', TaskItemUpdate.as_view(), name='update-taski'),
     path('delete/<int:pk>', TaskItemDelete.as_view(), name='delete-taski'),
     path('opps/<int:item_id>', ItemOpportunityLookup.as_view(), name='iopp-lookup'),
+    path('opps/create/', ItemOpportunityLookup.as_view(), name='iopp-lookup'),
 ]
