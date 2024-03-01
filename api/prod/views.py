@@ -38,6 +38,13 @@ class TaskListList(generics.ListAPIView):
     serializer_class = TaskListSerializer
 
 
+class TaskListSearchOwner(generics.ListAPIView):
+    def get_queryset(self):
+        specified_owner = self.kwargs.get('username')
+        return TaskList.objects.filter(owner=specified_owner)
+
+    serializer_class = TaskListSerializer
+
 class TaskListDetail(generics.RetrieveAPIView):
     queryset = TaskList.objects.all()
     serializer_class = TaskListSerializer
@@ -64,11 +71,19 @@ class TaskItemList(generics.ListAPIView):
 
 
 class TaskItemSearchListID(generics.ListAPIView):
-
     def get_queryset(self):
         specified_list = self.kwargs.get('list_id')
         return TaskItem.objects.filter(list=specified_list)
     serializer_class = TaskItemSerializer
+
+
+class TaskItemSearchOwner(generics.ListAPIView):
+    def get_queryset(self):
+        specified_owner = self.kwargs.get('username')
+        return TaskItem.objects.filter(owner=specified_owner)
+
+    serializer_class = TaskItemSerializer
+
 
 class TaskItemDetail(generics.RetrieveAPIView):
     queryset = TaskItem.objects.all()
