@@ -16,7 +16,7 @@ class AccountList(generics.ListAPIView):
     serializer_class = AccountSerializer
 
 class AccountCheck(generics.ListAPIView):
-    serializer_class = TaskItemSerializer
+    serializer_class = AccountSerializer
 
     def list(self, request, *args, **kwargs):
         specified_user = self.kwargs.get('username')
