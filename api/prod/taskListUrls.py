@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import TaskListCreate, TaskListList, TaskListDetail, TaskListUpdate, TaskListDelete, TaskItemSearchOwner
+from .views import TaskListCreate, TaskListList, TaskListDetail, TaskListUpdate, TaskListDelete, TaskListSearchOwner
 
 urlpatterns = [
     path('create/', TaskListCreate.as_view(), name='create-taskl'),
