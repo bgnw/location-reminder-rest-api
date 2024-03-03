@@ -30,7 +30,7 @@ class TaskItemSerializer(serializers.ModelSerializer):
 
 
 class ItemOpportunitySerializer(serializers.ModelSerializer):
-    item = TaskItemSerializer()
+    item = serializers.PrimaryKeyRelatedField(queryset=TaskItem.objects.all()) # TaskItemSerializer()
     class Meta:
         model = ItemOpportunity
         fields = '__all__'
