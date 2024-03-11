@@ -26,6 +26,7 @@ class TaskItem(models.Model):
     title = models.CharField("title", max_length=100)
     body_text = models.CharField("body_text", max_length=1500)
     remind_method = models.CharField("remind_method", max_length=30, null=True, blank=True)
+    poi_filters = models.CharField("poi_filters", max_length=2000, null=True, blank=True)
     attachment_img_path = models.CharField("attachment_img_path", max_length=1024, null=True, blank=True)
     is_sub_task = models.BooleanField("is_sub_task", null=True, blank=True)
     parent_task = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)  # FK of another TaskItem
