@@ -12,8 +12,8 @@ class Account(models.Model):
 class TaskList(models.Model):
     list_id = models.AutoField("list_id", primary_key=True)
     title = models.CharField("title", max_length=80)
-    created_at = models.DateTimeField("created_at", default=None)
-    icon_name = models.CharField("icon_name", max_length=100, default=None)
+    created_at = models.DateTimeField("created_at")
+    icon_name = models.CharField("icon_name", max_length=100, null=True, blank=True)
     owner = models.ForeignKey(Account, on_delete=models.CASCADE)
     sort_by = models.CharField("sort_by", max_length=30)
     visibility = models.PositiveSmallIntegerField("visibility", default=0)
