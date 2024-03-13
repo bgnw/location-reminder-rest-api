@@ -24,7 +24,7 @@ class TaskItem(models.Model):
     list = models.ForeignKey(TaskList, on_delete=models.CASCADE)
     owner = models.ForeignKey(Account, on_delete=models.CASCADE)
     title = models.CharField("title", max_length=100)
-    body_text = models.CharField("body_text", max_length=1500)
+    body_text = models.CharField("body_text", max_length=1500, null=True, blank=True)
     remind_method = models.CharField("remind_method", max_length=30, null=True, blank=True)
     poi_filters = models.CharField("poi_filters", max_length=2000, null=True, blank=True)
     attachment_img_path = models.CharField("attachment_img_path", max_length=1024, null=True, blank=True)
