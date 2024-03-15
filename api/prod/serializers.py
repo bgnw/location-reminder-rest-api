@@ -40,7 +40,7 @@ class TaskItemSerializer(serializers.ModelSerializer):
         ]
 
         def create(self, data):
-            poi_filters_data = data.pop("poi_filters", [])
+            poi_filters_data = data.pop("poi_filters2", [])
             task_item = TaskItem.objects.create(**data)
             for poi_filter_data in poi_filters_data:
                 PoiFilter.objects.create(taskItem=task_item, filter=poi_filter_data)
