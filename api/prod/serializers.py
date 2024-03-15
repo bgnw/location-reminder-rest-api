@@ -17,12 +17,17 @@ class TaskListSerializer(serializers.ModelSerializer):
 class PoiFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PoiFilter
+        fields = '__all__'
+
+class PoiFilterOnlyFilterFieldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PoiFilter
         fields = ["filters"]
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
     list = TaskListSerializer
-    filters = PoiFilterSerializer(many=True, required=True)
+    filters = PoiFilterOnlyFilterFieldSerializer(many=True, required=True)
     class Meta:
         model = TaskItem
         fields = [
