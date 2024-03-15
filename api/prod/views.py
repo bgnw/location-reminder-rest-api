@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 
-from .models import Account, TaskList, TaskItem, ItemOpportunity
-from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer, ItemOpportunitySerializer
+from .models import Account, TaskList, TaskItem, ItemOpportunity, PoiFilter
+from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer, ItemOpportunitySerializer, PoiFilterSerializer
 from rest_framework import generics
 from rest_framework import filters
 
@@ -127,3 +127,34 @@ class ItemOpportunityCreate(generics.CreateAPIView):
     queryset = ItemOpportunity.objects.all()
     serializer_class = ItemOpportunitySerializer
 
+
+class FilterCreate(generics.CreateAPIView):
+    queryset = PoiFilterSerializer.objects.all()
+    serializer_class = PoiFilterSerializer
+
+
+class FiltersForItem(generics.ListAPIView):
+    def get_queryset(self):
+        specified_item = self.kwargs.get('item')
+        return PoiFilter.objects.filter(item=specified_item)
+
+    serializer_class = PoiFilterSerializer
+
+class FilterList(generics.ListAPIView):
+    queryset = PoiFilterSerializer.objects.all()
+    serializer_class = PoiFilterSerializer
+
+
+class FilterDetail(generics.RetrieveAPIView):
+    queryset = PoiFilterSerializer.objects.all()
+    serializer_class = PoiFilterSerializer
+
+
+class FilterUpdate(generics.RetrieveUpdateAPIView):
+    queryset = PoiFilterSerializer.objects.all()
+    serializer_class = PoiFilterSerializer
+
+
+class FilterDelete(generics.RetrieveDestroyAPIView):
+    queryset = PoiFilterSerializer.objects.all()
+    serializer_class = PoiFilterSerializer
