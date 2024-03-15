@@ -16,6 +16,7 @@ urlpatterns = [
     path('filters-add', FilterCreate.as_view(), name='filters-add'),
     path('filters-list', FilterList.as_view(), name='filters-list'),
     path('filters-foritem/<int:item>', FiltersForItem.as_view(), name='filters-foritem'),
+    path('filters-foruser/<str:username>', FiltersForUser.as_view(), name='filters-foruser'),
     path('filters-update/<int:entry_id>', FilterUpdate.as_view(), name='filters-update'),
     path('filters-delete/<int:entry_id>', FilterDelete.as_view(), name='filters-delete'),
 ]
