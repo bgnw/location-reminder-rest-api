@@ -1,6 +1,5 @@
 from django.urls import include, path
-from .views import (TaskItemCreate, TaskItemList, TaskItemDetail, TaskItemUpdate, TaskItemDelete, TaskItemSearchListID,
-                    TaskItemSearchOwner, ItemOpportunityList, ItemOpportunityLookup, ItemOpportunityCreate)
+from .views import *
 
 urlpatterns = [
     path('create/', TaskItemCreate.as_view(), name='create-taski'),
@@ -13,4 +12,10 @@ urlpatterns = [
     path('opps/', ItemOpportunityList.as_view(), name='iopp-list'),
     path('opps/<int:item_id>', ItemOpportunityLookup.as_view(), name='iopp-lookup'),
     path('opps/create/', ItemOpportunityCreate.as_view(), name='iopp-create'),
+
+    path('filters-add', FilterCreate.as_view(), name='filters-add'),
+    path('filters-list', FilterList.as_view(), name='filters-list'),
+    path('filters-foritem/<int:item>', FiltersForItem.as_view(), name='filters-foritem'),
+    path('filters-update/<int:entry_id>', FilterUpdate.as_view(), name='filters-update'),
+    path('filters-delete/<int:entry_id>', FilterDelete.as_view(), name='filters-delete'),
 ]
