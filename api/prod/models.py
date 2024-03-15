@@ -34,6 +34,14 @@ class TaskItem(models.Model):
     snooze_until = models.DateTimeField("snooze_until", null=True, blank=True)
     due_at = models.DateTimeField("due_at", null=True, blank=True)
 
+
+class PoiFilter(models.Model):
+    class Meta:
+        unique_together = ('filter', 'item_id')
+    item_id = models.ForeignKey(TaskItem, on_delete=models.CASCADE)
+    filter = models.CharField("filter", max_length=100)
+
+
 class ItemOpportunity(models.Model):
     opp_id = models.AutoField("opp_id", primary_key=True)
     item = models.ForeignKey(TaskItem, on_delete=models.CASCADE)
