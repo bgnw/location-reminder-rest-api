@@ -20,7 +20,7 @@ class PoiFilterSerializer(serializers.ModelSerializer):
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
-    list = TaskListSerializer()  # Instantiate TaskListSerializer
+    list = TaskListSerializer
     filters = PoiFilterSerializer(many=True, required=False, read_only=True)
     class Meta:
         model = TaskItem
