@@ -16,7 +16,7 @@ class TaskListSerializer(serializers.ModelSerializer):
 class PoiFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PoiFilter
-        fields = ["item_id", "filter"]
+        fields = ["filter"]
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
@@ -37,14 +37,14 @@ class TaskItemSerializer(serializers.ModelSerializer):
             "completed",
             "snooze_until",
             "due_at",
-            "poi_filters2",
+            "filters",
         ]
 
         def create(self, data):
-            poi_filters_data = data.pop("poi_filters2", [])
+            poi_filters_data = data.pop("filters", [])
             task_item = TaskItem.objects.create(**data)
             for poi_filter_data in poi_filters_data:
-                PoiFilter.objects.create(item_id=task_item, filter=poi_filter_data)
+                PoiFilter.objects.create(item=task_item, filter=poi_filter_data)
             return task_item
 
 # class TaskItemMiniSerializer(serializers.ModelSerializer):
