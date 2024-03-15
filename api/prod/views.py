@@ -140,6 +140,16 @@ class FiltersForItem(generics.ListAPIView):
 
     serializer_class = PoiFilterSerializer
 
+
+class FiltersForUser(generics.ListAPIView):
+    def get_queryset(self):
+        specified_username = self.kwargs.get('username')
+        owned_items = TaskItem.objects.filter(owner=specified_username)
+        return PoiFilter.objects.filter(item__in=owned_items)
+
+    serializer_class = PoiFilterSerializer
+
+
 class FilterList(generics.ListAPIView):
     queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
