@@ -129,7 +129,7 @@ class ItemOpportunityCreate(generics.CreateAPIView):
 
 
 class FilterCreate(generics.CreateAPIView):
-    queryset = PoiFilterSerializer.objects.all()
+    queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
 
 
@@ -141,20 +141,20 @@ class FiltersForItem(generics.ListAPIView):
     serializer_class = PoiFilterSerializer
 
 class FilterList(generics.ListAPIView):
-    queryset = PoiFilterSerializer.objects.all()
+    queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
 
 
 class FilterDetail(generics.RetrieveAPIView):
-    queryset = PoiFilterSerializer.objects.all()
+    queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
 
 
 class FilterUpdate(generics.RetrieveUpdateAPIView):
-    queryset = PoiFilterSerializer.objects.all()
+    queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
 
 
 class FilterDelete(generics.RetrieveDestroyAPIView):
-    queryset = PoiFilterSerializer.objects.all()
+    queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
