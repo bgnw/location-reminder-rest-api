@@ -26,19 +26,18 @@ class TaskItem(models.Model):
     title = models.CharField("title", max_length=100)
     body_text = models.CharField("body_text", max_length=1500, null=True, blank=True)
     remind_method = models.CharField("remind_method", max_length=30, null=True, blank=True)
-    # poi_filters = models.CharField("poi_filters", max_length=2000, null=True, blank=True)
     attachment_img_path = models.CharField("attachment_img_path", max_length=1024, null=True, blank=True)
     is_sub_task = models.BooleanField("is_sub_task", null=True, blank=True)
     parent_task = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)  # FK of another TaskItem
     completed = models.BooleanField("completed", default=False)
     snooze_until = models.DateTimeField("snooze_until", null=True, blank=True)
     due_at = models.DateTimeField("due_at", null=True, blank=True)
-
+    filters = models.CharField("filters", max_length=1, null=True, blank=True)
 
 class PoiFilter(models.Model):
     entry_id = models.AutoField("entry_id", primary_key=True)
     item = models.ForeignKey(TaskItem, on_delete=models.CASCADE)
-    filter = models.CharField("filter", max_length=100)
+    filters = models.CharField("filter", max_length=100)
 
 
 class ItemOpportunity(models.Model):

@@ -1,3 +1,4 @@
+import json
 from rest_framework import serializers
 from .models import *
 
@@ -16,12 +17,12 @@ class TaskListSerializer(serializers.ModelSerializer):
 class PoiFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PoiFilter
-        fields = ["filter"]
+        fields = ["filters"]
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
     list = TaskListSerializer
-    filters = PoiFilterSerializer(many=True, required=False, read_only=True)
+    filters = PoiFilterSerializer(many=True, required=True)
     class Meta:
         model = TaskItem
         fields = [
@@ -37,23 +38,16 @@ class TaskItemSerializer(serializers.ModelSerializer):
             "completed",
             "snooze_until",
             "due_at",
-            "filters",
+            "filters"
         ]
 
     def create(self, validated_data):
-        print("in create")
         poi_filters_data = validated_data.pop("filters", [])
         task_item = TaskItem.objects.create(**validated_data)
         for poi_filter_data in poi_filters_data:
             print("in loop")
             PoiFilter.objects.create(item=task_item, **poi_filter_data)
         return task_item
-
-# class TaskItemMiniSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = TaskItem
-#         fields = ['item_id', 'list', 'owner', 'remind_method', 'attachment_img_path', 'snooze_until', 'completed',
-#                   'due_at']
 
 
 class ItemOpportunitySerializer(serializers.ModelSerializer):
