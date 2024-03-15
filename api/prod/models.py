@@ -36,8 +36,7 @@ class TaskItem(models.Model):
 
 
 class PoiFilter(models.Model):
-    class Meta:
-        unique_together = ('filter', 'item_id')
+    entry_id = models.AutoField("entry_id", primary_key=True)
     item_id = models.ForeignKey(TaskItem, on_delete=models.CASCADE)
     filter = models.CharField("filter", max_length=100)
 

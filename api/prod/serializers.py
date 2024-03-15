@@ -16,7 +16,7 @@ class TaskListSerializer(serializers.ModelSerializer):
 class PoiFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PoiFilter
-        fields = ["filter"]
+        fields = ["item_id", "filter"]
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
