@@ -21,7 +21,7 @@ class PoiFilterSerializer(serializers.ModelSerializer):
 
 class TaskItemSerializer(serializers.ModelSerializer):
     list = TaskListSerializer
-    poi_filters2 = PoiFilterSerializer(many=True, required=False, read_only=True)
+    filters = PoiFilterSerializer(many=True, required=False, read_only=True)
     class Meta:
         model = TaskItem
         fields = [
