@@ -16,27 +16,28 @@ class TaskListSerializer(serializers.ModelSerializer):
 class PoiFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PoiFilter
-        fields = '__all__'
+        fields = ["filter"]
 
 
 class TaskItemSerializer(serializers.ModelSerializer):
     list = TaskListSerializer
-    poi_filters2 = PoiFilterSerializer(many=True, required=False)
+    poi_filters2 = PoiFilterSerializer(many=True, required=False, read_only=True)
     class Meta:
         model = TaskItem
         fields = [
+            "item_id",
             "list",
             "owner",
             "title",
             "body_text",
             "remind_method",
-            "poi_filters2",
             "attachment_img_path",
             "is_sub_task",
             "parent_task",
             "completed",
             "snooze_until",
             "due_at",
+            "poi_filters2",
         ]
 
         def create(self, data):
@@ -58,4 +59,3 @@ class ItemOpportunitySerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemOpportunity
         fields = '__all__'
-
