@@ -49,7 +49,7 @@ class TaskItemSerializer(serializers.ModelSerializer):
         ]
 
     def get_applicable_filters(self, obj):
-        filters_for_item = obj.poi_filters.all()
+        filters_for_item = PoiFilter.objects.filter(item=obj.item_id)
         serializer = PoiFilterSerializer(filters_for_item, many=True)
         return serializer.data
 
