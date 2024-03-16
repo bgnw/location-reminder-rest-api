@@ -28,6 +28,7 @@ class PoiFilterOnlyFilterFieldSerializer(serializers.ModelSerializer):
 class TaskItemSerializer(serializers.ModelSerializer):
     list = TaskListSerializer
     filters = PoiFilterOnlyFilterFieldSerializer(many=True, required=True)
+    applicable_filters = serializers.SerializerMethodField()
     class Meta:
         model = TaskItem
         fields = [
@@ -43,8 +44,14 @@ class TaskItemSerializer(serializers.ModelSerializer):
             "completed",
             "snooze_until",
             "due_at",
-            "filters"
+            "filters",
+            "applicable_filters"
         ]
+
+    def get_applicable_filters(self, obj):
+        filters_for_item = obj.poi_filters.all()
+        serializer = PoiFilterSerializer(filters_for_item, many=True)
+        return serializer.data
 
     def create(self, validated_data):
         poi_filters_data = validated_data.pop("filters", [])
