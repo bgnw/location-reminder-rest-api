@@ -8,6 +8,8 @@ class Account(models.Model):
     password = models.CharField("password", max_length=200)
     biography = models.CharField("biography", max_length=600, default=None)
     profile_img_path = models.CharField("profile_img_path", max_length=1024)
+    lati = models.DecimalField("lati", max_digits=9, decimal_places=6, null=True)
+    longi = models.DecimalField("longi", max_digits=9, decimal_places=6, null=True)
 
 
 class TaskList(models.Model):
