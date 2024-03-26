@@ -199,7 +199,7 @@ class CollabRqList(generics.ListAPIView):
 class CollabRqSentForUser(generics.ListAPIView):
     def get_queryset(self):
         specified_user_sender = self.kwargs.get('user_sender')
-        sent_requests = CollaboratorPendingRequest.objects.filter(user_sender=specified_user_sender)
+        sent_requests = CollaboratorPendingRequest.objects.filter(user_sender__username=specified_user_sender)
         return sent_requests
 
     serializer_class = CollaboratorPendingRequestSerializer
@@ -208,7 +208,7 @@ class CollabRqSentForUser(generics.ListAPIView):
 class CollabRqReceivedForUser(generics.ListAPIView):
     def get_queryset(self):
         specified_user_recipient = self.kwargs.get('user_recipient')
-        received_requests = CollaboratorPendingRequest.objects.filter(user_recipient=specified_user_recipient)
+        received_requests = CollaboratorPendingRequest.objects.filter(user_recipient__username=specified_user_recipient)
         return received_requests
 
     serializer_class = CollaboratorPendingRequestSerializer
