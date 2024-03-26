@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 
-from .models import Account, TaskList, TaskItem, ItemOpportunity, PoiFilter
-from .serializers import AccountSerializer, TaskListSerializer, TaskItemSerializer, ItemOpportunitySerializer, PoiFilterSerializer
+from .models import *
+from .serializers import *
 from rest_framework import generics
 from rest_framework import filters
 
@@ -168,3 +168,16 @@ class FilterUpdate(generics.RetrieveUpdateAPIView):
 class FilterDelete(generics.RetrieveDestroyAPIView):
     queryset = PoiFilter.objects.all()
     serializer_class = PoiFilterSerializer
+
+
+
+
+
+class LogAdd(generics.CreateAPIView):
+    queryset = Log.objects.all()
+    serializer_class = LogSerializer
+
+
+class LogList(generics.ListAPIView):
+    queryset = Log.objects.all()
+    serializer_class = LogSerializer

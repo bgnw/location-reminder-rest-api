@@ -67,3 +67,9 @@ class ItemOpportunitySerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemOpportunity
         fields = '__all__'
+
+
+class LogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Log
+        fields = '__all__'

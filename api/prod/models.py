@@ -86,3 +86,8 @@ class TaskReminder(models.Model):
     # boundary
     # peer_username
 
+
+class Log(models.Model):
+    entry_id = models.AutoField("entry_id", primary_key=True)
+    lati = models.DecimalField("lati", max_digits=9, decimal_places=6)
+    longi = models.DecimalField("longi", max_digits=9, decimal_places=6)

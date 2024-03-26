@@ -22,4 +22,5 @@ urlpatterns = [
     path('prod-account/', include('prod.accountUrls')),
     path('prod-taskl/', include('prod.taskListUrls')),
     path('prod-taski/', include('prod.taskItemUrls')),
+    path('logging/', include('prod.loggingUrls')),
 ]
