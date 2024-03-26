@@ -73,3 +73,15 @@ class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
         fields = '__all__'
+
+
+class CollaboratorPendingRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollaboratorPendingRequest
+        fields = '__all__'
+
+
+class CollaboratorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Collaborator
+        fields = '__all__'

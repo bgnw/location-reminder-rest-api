@@ -58,7 +58,7 @@ class CollaboratorPendingRequest(models.Model):
     request_id = models.AutoField("request_id", primary_key=True)
     user_sender = models.ForeignKey(Account, related_name="user_sender", on_delete=models.CASCADE)
     user_recipient = models.ForeignKey(Account, related_name="user_recipient", on_delete=models.CASCADE)
-    datetime_sent = models.DateTimeField("datetime_sent", default=None)
+    datetime_sent = models.DateTimeField("datetime_sent", default=timezone.now)
 
 
 class Collaborator(models.Model):

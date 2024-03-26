@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from rest_framework.response import Response
 
@@ -170,9 +171,6 @@ class FilterDelete(generics.RetrieveDestroyAPIView):
     serializer_class = PoiFilterSerializer
 
 
-
-
-
 class LogAdd(generics.CreateAPIView):
     queryset = Log.objects.all()
     serializer_class = LogSerializer
@@ -181,3 +179,63 @@ class LogAdd(generics.CreateAPIView):
 class LogList(generics.ListAPIView):
     queryset = Log.objects.all()
     serializer_class = LogSerializer
+
+
+class CollabRqAdd(generics.CreateAPIView):
+    queryset = CollaboratorPendingRequest.objects.all()
+    serializer_class = CollaboratorPendingRequestSerializer
+
+
+class CollabRqDelete(generics.RetrieveDestroyAPIView):
+    queryset = CollaboratorPendingRequest.objects.all()
+    serializer_class = CollaboratorPendingRequestSerializer
+
+
+class CollabRqList(generics.ListAPIView):
+    queryset = CollaboratorPendingRequest.objects.all()
+    serializer_class = CollaboratorPendingRequestSerializer
+
+
+class CollabRqSentForUser(generics.ListAPIView):
+    def get_queryset(self):
+        specified_user_sender = self.kwargs.get('user_sender')
+        sent_requests = CollaboratorPendingRequest.objects.filter(user_sender=specified_username)
+        return sent_requests
+
+    serializer_class = CollaboratorPendingRequestSerializer
+
+
+class CollabRqReceivedForUser(generics.ListAPIView):
+    def get_queryset(self):
+        specified_user_recipient = self.kwargs.get('user_recipient')
+        received_requests = CollaboratorPendingRequest.objects.filter(user_recipient=specified_username)
+        return received_requests
+
+    serializer_class = CollaboratorPendingRequestSerializer
+
+
+class CollaboratorAdd(generics.CreateAPIView):
+    queryset = Collaborator.objects.all()
+    serializer_class = CollaboratorSerializer
+
+
+class CollaboratorDelete(generics.RetrieveDestroyAPIView):
+    queryset = Collaborator.objects.all()
+    serializer_class = CollaboratorSerializer
+
+
+class CollaboratorList(generics.ListAPIView):
+    queryset = Collaborator.objects.all()
+    serializer_class = CollaboratorSerializer
+
+
+class CollaboratorsForUser(generics.ListAPIView):
+    def get_queryset(self):
+        specified_user = self.kwargs.get('user')
+        collaborators = Collaborator.objects.filter(Q(user_master=specified_user) | Q(user_peer=specified_user))
+        return collaborators
+
+    serializer_class = CollaboratorSerializer
+
+
+
