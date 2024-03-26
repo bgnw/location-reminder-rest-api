@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Account(models.Model):
@@ -89,5 +90,7 @@ class TaskReminder(models.Model):
 
 class Log(models.Model):
     entry_id = models.AutoField("entry_id", primary_key=True)
+    timestamp = models.DateTimeField("timestamp", default=timezone.now)
     lati = models.DecimalField("lati", max_digits=9, decimal_places=6)
     longi = models.DecimalField("longi", max_digits=9, decimal_places=6)
+    notes = models.CharField("comments", max_length=2000)
