@@ -232,7 +232,7 @@ class CollaboratorList(generics.ListAPIView):
 class CollaboratorsForUser(generics.ListAPIView):
     def get_queryset(self):
         specified_user = self.kwargs.get('user')
-        collaborators = Collaborator.objects.filter(Q(user_master=specified_user) | Q(user_peer=specified_user))
+        collaborators = Collaborator.objects.filter(Q(user_master__username=specified_user) | Q(user_peer__username=specified_user))
         return collaborators
 
     serializer_class = CollaboratorSerializer
