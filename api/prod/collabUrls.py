@@ -10,6 +10,6 @@ urlpatterns = [
 
     path('add/', CollaboratorAdd.as_view(), name='collab-add'),
     path('delete/<str:pk>', CollaboratorDelete.as_view(), name='collab-delete'),
-    path('get-user/<str:user_master>', CollaboratorsForUser.as_view(), name='collab-get-for-user'),
+    path('get-user/<str:user>', CollaboratorsForUser.as_view(), name='collab-get-for-user'),
     path('get', CollaboratorList.as_view()),
 ]
