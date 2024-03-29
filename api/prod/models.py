@@ -8,8 +8,8 @@ class Account(models.Model):
     password = models.CharField("password", max_length=200)
     biography = models.CharField("biography", max_length=600, default=None)
     profile_img_path = models.CharField("profile_img_path", max_length=1024)
-    lati = models.DecimalField("lati", max_digits=9, decimal_places=6, null=True)
-    longi = models.DecimalField("longi", max_digits=9, decimal_places=6, null=True)
+    lati = models.DecimalField("lati", max_digits=12, decimal_places=9, null=True)
+    longi = models.DecimalField("longi", max_digits=12, decimal_places=9, null=True)
 
 
 class TaskList(models.Model):
@@ -49,9 +49,9 @@ class ItemOpportunity(models.Model):
     suppressed = models.BooleanField("suppressed", default=False)
     place_name = models.CharField("place_name", max_length=200)
     category = models.CharField("category", max_length=200)
-    lati = models.DecimalField("lati", max_digits=9, decimal_places=6)
-    longi = models.DecimalField("longi", max_digits=9, decimal_places=6)
-    alti = models.DecimalField("alti", max_digits=8, decimal_places=2)
+    lati = models.DecimalField("lati", max_digits=12, decimal_places=9)
+    longi = models.DecimalField("longi", max_digits=12, decimal_places=9)
+    alti = models.DecimalField("alti", max_digits=12, decimal_places=9)
 
 
 class CollaboratorPendingRequest(models.Model):
@@ -93,6 +93,6 @@ class TaskReminder(models.Model):
 class Log(models.Model):
     entry_id = models.AutoField("entry_id", primary_key=True)
     timestamp = models.DateTimeField("timestamp", default=timezone.now)
-    lati = models.DecimalField("lati", max_digits=9, decimal_places=6)
-    longi = models.DecimalField("longi", max_digits=9, decimal_places=6)
+    lati = models.DecimalField("lati", max_digits=12, decimal_places=9)
+    longi = models.DecimalField("longi", max_digits=12, decimal_places=9)
     notes = models.CharField("comments", max_length=2000)
