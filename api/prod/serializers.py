@@ -38,6 +38,7 @@ class TaskItemSerializer(serializers.ModelSerializer):
             "title",
             "body_text",
             "remind_method",
+            "user_peer",
             "attachment_img_path",
             "is_sub_task",
             "parent_task",
