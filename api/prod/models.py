@@ -25,10 +25,11 @@ class TaskList(models.Model):
 class TaskItem(models.Model):
     item_id = models.AutoField("item_id", primary_key=True)
     list = models.ForeignKey(TaskList, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Account, related_name="owner", on_delete=models.CASCADE)
     title = models.CharField("title", max_length=100)
     body_text = models.CharField("body_text", max_length=1500, null=True, blank=True)
     remind_method = models.CharField("remind_method", max_length=30, null=True, blank=True)
+    user_peer = models.ForeignKey(Account, related_name="user_peer", on_delete=models.CASCADE, null=True, blank=True)
     attachment_img_path = models.CharField("attachment_img_path", max_length=1024, null=True, blank=True)
     is_sub_task = models.BooleanField("is_sub_task", null=True, blank=True)
     parent_task = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)  # FK of another TaskItem
