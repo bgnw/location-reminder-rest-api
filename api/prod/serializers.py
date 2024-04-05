@@ -45,6 +45,8 @@ class TaskItemSerializer(serializers.ModelSerializer):
             "completed",
             "snooze_until",
             "due_at",
+            "lati",
+            "longi",
             "filters",
             "applicable_filters"
         ]
