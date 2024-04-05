@@ -36,6 +36,8 @@ class TaskItem(models.Model):
     completed = models.BooleanField("completed", default=False)
     snooze_until = models.DateTimeField("snooze_until", null=True, blank=True)
     due_at = models.DateTimeField("due_at", null=True, blank=True)
+    lati = models.DecimalField("lati", max_digits=12, decimal_places=9)
+    longi = models.DecimalField("longi", max_digits=12, decimal_places=9)
     filters = models.CharField("filters", max_length=1, null=True, blank=True)
 
 class PoiFilter(models.Model):
