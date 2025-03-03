@@ -1,0 +1,93 @@
+import json
+from rest_framework import serializers
+from .models import *
+
+
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'
+
+
+class TaskListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskList
+        fields = '__all__'
+
+class PoiFilterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PoiFilter
+        fields = ["filters"]
+
+
+class TaskItemSerializer(serializers.ModelSerializer):
+    list = TaskListSerializer
+    filters = PoiFilterSerializer(many=True, required=True)
+    class Meta:
+        model = TaskItem
+        fields = [
+            "item_id",
+            "list",
+            "owner",
+            "title",
+            "body_text",
+            "remind_method",
+            "attachment_img_path",
+            "is_sub_task",
+            "parent_task",
+            "completed",
+            "snooze_until",
+            "due_at",
+            "filters"
+        ]
+
+    def create(self, validated_data):
+        print("in create")
+        print("before pop  " + str(validated_data))
+        #for key, value in self.context['request'].POST.iteritems():
+        #    print("%s %s" % (key, value))
+        #print(str(self.context['request'].POST.get("filters", [])))
+
+        #filters_str = self.context['request'].POST.get('filters', '[]')
+        #filters = json.loads(filters_str)
+
+        ##print("filters_str: " + str(filters_str) + " filters: " + str(filters))
+        poi_filters_data = validated_data.pop("filters", [])
+        #poi_filters_data = {'filters': "amenity='cafe'"}
+        #del validated_data["filters"]
+
+        print("after pop+del  " + str(validated_data))
+
+        #try:
+        task_item = TaskItem.objects.create(
+            list = validated_data.pop('list'),
+            owner = validated_data.pop('owner'),
+            title = validated_data.pop('title'),
+            body_text = validated_data.pop('body_text'),
+            remind_method = validated_data.pop('remind_method'),
+            attachment_img_path = validated_data.pop('attachment_img_path'),
+            is_sub_task = validated_data.pop('is_sub_task'),
+            parent_task = validated_data.pop('parent_task'),
+            completed = validated_data.pop('completed'),
+            snooze_until = validated_data.pop('snooze_until'),
+            due_at = validated_data.pop('due_at')
+        )
+        #except AttributeError:
+        ##    pass
+        for poi_filter_data in poi_filters_data:
+            print("in loop")
+            PoiFilter.objects.create(item=task_item, **poi_filter_data)
+        return task_item
+
+# class TaskItemMiniSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = TaskItem
+#         fields = ['item_id', 'list', 'owner', 'remind_method', 'attachment_img_path', 'snooze_until', 'completed',
+#                   'due_at']
+
+
+class ItemOpportunitySerializer(serializers.ModelSerializer):
+    item = serializers.PrimaryKeyRelatedField(queryset=TaskItem.objects.all()) # TaskItemSerializer()
+    class Meta:
+        model = ItemOpportunity
+        fields = '__all__'
